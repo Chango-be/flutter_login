@@ -84,7 +84,7 @@ class _RecoverCardState extends State<_RecoverCard>
       controller: _nameController,
       width: width,
       labelText: messages.userHint,
-      prefixIcon: Icon(FontAwesomeIcons.solidUserCircle),
+      prefixIcon: Icon(FontAwesomeIcons.solidCircleUser),
       keyboardType: TextFieldUtils.getKeyboardType(widget.userType),
       autofillHints: [TextFieldUtils.getAutofillHints(widget.userType)],
       textInputAction: TextInputAction.done,

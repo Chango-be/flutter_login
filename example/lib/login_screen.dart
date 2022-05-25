@@ -105,7 +105,7 @@ class LoginScreen extends StatelessWidget {
       ],
       additionalSignupFields: [
         UserFormField(
-            keyName: 'Username', icon: Icon(FontAwesomeIcons.userAlt)),
+            keyName: 'Username', icon: Icon(FontAwesomeIcons.userLarge)),
         UserFormField(keyName: 'Name'),
         UserFormField(keyName: 'Surname'),
         UserFormField(

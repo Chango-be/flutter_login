@@ -20,7 +20,7 @@ class _TermCheckboxState extends State<TermCheckbox> {
       title: widget.termOfService.linkUrl != null
           ? InkWell(
               onTap: () {
-                launch(widget.termOfService.linkUrl!);
+                launchUrl(Uri.parse(widget.termOfService.linkUrl!));
               },
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -51,6 +51,7 @@ class _TermCheckboxState extends State<TermCheckbox> {
             widget.termOfService.getStatus() != true) {
           return widget.termOfService.validationErrorMessage;
         }
+        return null;
       },
     );
   }

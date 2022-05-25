@@ -1,6 +1,6 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+
 import 'animated_text.dart';
 import 'ring.dart';
 
@@ -90,7 +90,7 @@ class _AnimatedButtonState extends State<AnimatedButton>
     final buttonTheme = theme.floatingActionButtonTheme;
 
     _color = widget.color ?? buttonTheme.backgroundColor;
-    _loadingColor = widget.loadingColor ?? theme.accentColor;
+    _loadingColor = widget.loadingColor ?? theme.colorScheme.secondary;
 
     _colorAnimation = ColorTween(
       begin: _color,

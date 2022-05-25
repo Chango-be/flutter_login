@@ -1,14 +1,15 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'animated_button.dart';
-import 'animated_text_form_field.dart';
+import 'package:provider/provider.dart';
+
 import '../models/login_data.dart';
 import '../providers/auth.dart';
 import '../providers/login_messages.dart';
 import '../widget_helper.dart';
+import 'animated_button.dart';
+import 'animated_text_form_field.dart';
 
 class ConfirmRecoverCard extends StatefulWidget {
   ConfirmRecoverCard({
@@ -93,7 +94,7 @@ class ConfirmRecoverCardState extends State<ConfirmRecoverCard>
     return AnimatedTextFormField(
       width: width,
       labelText: messages.recoveryCodeHint,
-      prefixIcon: Icon(FontAwesomeIcons.solidCheckCircle),
+      prefixIcon: Icon(FontAwesomeIcons.solidCircleCheck),
       textInputAction: TextInputAction.next,
       onFieldSubmitted: (value) {
         FocusScope.of(context).requestFocus(_passwordFocusNode);

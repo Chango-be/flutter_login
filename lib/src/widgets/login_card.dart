@@ -10,13 +10,16 @@ class _LoginCard extends StatefulWidget {
     required this.onSwitchSignUpAdditionalData,
     required this.userType,
     required this.requireAdditionalSignUpFields,
+    // ignore: unused_element
     this.onSwitchConfirmSignup,
+    // ignore: unused_element
     this.onSwitchAuth,
     this.onSubmitCompleted,
     this.hideForgotPasswordButton = false,
     this.hideSignUpButton = false,
     this.loginAfterSignUp = true,
     this.hideProvidersTitle = false,
+    this.autofocus = false,
   }) : super(key: key);
 
   final AnimationController? loadingController;
@@ -33,6 +36,7 @@ class _LoginCard extends StatefulWidget {
   final bool hideProvidersTitle;
   final LoginUserType userType;
   final bool requireAdditionalSignUpFields;
+  final bool autofocus;
 
   @override
   _LoginCardState createState() => _LoginCardState();
@@ -309,7 +313,7 @@ class _LoginCardState extends State<_LoginCard> with TickerProviderStateMixin {
       autofillHints: _isSubmitting
           ? null
           : [TextFieldUtils.getAutofillHints(widget.userType)],
-      prefixIcon: Icon(FontAwesomeIcons.solidUserCircle),
+      prefixIcon: Icon(FontAwesomeIcons.solidCircleUser),
       keyboardType: TextFieldUtils.getKeyboardType(widget.userType),
       textInputAction: TextInputAction.next,
       onFieldSubmitted: (value) {
@@ -318,6 +322,7 @@ class _LoginCardState extends State<_LoginCard> with TickerProviderStateMixin {
       validator: widget.userValidator,
       onSaved: (value) => auth.email = value!,
       enabled: !_isSubmitting,
+      autofocus: widget.autofocus,
     );
   }
 
@@ -512,7 +517,7 @@ class _LoginCardState extends State<_LoginCard> with TickerProviderStateMixin {
             ),
           ),
           ExpandableContainer(
-            backgroundColor: theme.accentColor,
+            backgroundColor: theme.colorScheme.secondary,
             controller: _switchAuthController,
             initialState: isLogin
                 ? ExpandableContainerState.shrunk

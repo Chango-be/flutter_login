@@ -1,12 +1,13 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:flutter_login/theme.dart';
 import 'package:flutter_login/widgets.dart';
-import 'transition_route_observer.dart';
-import 'widgets/fade_in.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+
 import 'constants.dart';
+import 'transition_route_observer.dart';
 import 'widgets/animated_numeric_text.dart';
+import 'widgets/fade_in.dart';
 import 'widgets/round_button.dart';
 
 class DashboardScreen extends StatefulWidget {
@@ -65,13 +66,13 @@ class _DashboardScreenState extends State<DashboardScreen>
 
   AppBar _buildAppBar(ThemeData theme) {
     final menuBtn = IconButton(
-      color: theme.accentColor,
+      color: theme.colorScheme.secondary,
       icon: const Icon(FontAwesomeIcons.bars),
       onPressed: () {},
     );
     final signOutBtn = IconButton(
-      icon: const Icon(FontAwesomeIcons.signOutAlt),
-      color: theme.accentColor,
+      icon: const Icon(FontAwesomeIcons.rightFromBracket),
+      color: theme.colorScheme.secondary,
       onPressed: () => _goToLogin(context),
     );
     final title = Center(
@@ -120,8 +121,7 @@ class _DashboardScreenState extends State<DashboardScreen>
       title: title,
       backgroundColor: theme.primaryColor.withOpacity(.1),
       elevation: 0,
-      textTheme: theme.accentTextTheme,
-      iconTheme: theme.accentIconTheme,
+      iconTheme: theme.iconTheme,
     );
   }
 
@@ -129,7 +129,7 @@ class _DashboardScreenState extends State<DashboardScreen>
     final primaryColor =
         Colors.primaries.where((c) => c == theme.primaryColor).first;
     final accentColor =
-        Colors.primaries.where((c) => c == theme.accentColor).first;
+        Colors.primaries.where((c) => c == theme.colorScheme.secondary).first;
     final linearGradient = LinearGradient(colors: [
       primaryColor.shade800,
       primaryColor.shade200,
@@ -213,7 +213,7 @@ class _DashboardScreenState extends State<DashboardScreen>
             padding: const EdgeInsets.only(left: 16.0),
             alignment: Alignment.centerLeft,
             child: Icon(
-              FontAwesomeIcons.moneyBillAlt,
+              FontAwesomeIcons.moneyBill1,
               size: 20,
             ),
           ),
@@ -221,7 +221,7 @@ class _DashboardScreenState extends State<DashboardScreen>
           interval: Interval(step, aniInterval + step),
         ),
         _buildButton(
-          icon: Icon(FontAwesomeIcons.handHoldingUsd),
+          icon: Icon(FontAwesomeIcons.handHoldingDollar),
           label: 'Payment',
           interval: Interval(step * 2, aniInterval + step * 2),
         ),
@@ -236,22 +236,22 @@ class _DashboardScreenState extends State<DashboardScreen>
           interval: Interval(step, aniInterval + step),
         ),
         _buildButton(
-          icon: Icon(FontAwesomeIcons.history),
+          icon: Icon(FontAwesomeIcons.clockRotateLeft),
           label: 'History',
           interval: Interval(step * 2, aniInterval + step * 2),
         ),
         _buildButton(
-          icon: Icon(FontAwesomeIcons.ellipsisH),
+          icon: Icon(FontAwesomeIcons.ellipsis),
           label: 'Other',
           interval: Interval(0, aniInterval),
         ),
         _buildButton(
-          icon: Icon(FontAwesomeIcons.search, size: 20),
+          icon: Icon(FontAwesomeIcons.magnifyingGlass, size: 20),
           label: 'Search',
           interval: Interval(step, aniInterval + step),
         ),
         _buildButton(
-          icon: Icon(FontAwesomeIcons.slidersH, size: 20),
+          icon: Icon(FontAwesomeIcons.sliders, size: 20),
           label: 'Settings',
           interval: Interval(step * 2, aniInterval + step * 2),
         ),

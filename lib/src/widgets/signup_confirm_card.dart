@@ -2,15 +2,13 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_login/flutter_login.dart';
-import 'package:provider/provider.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:provider/provider.dart';
+
+import '../providers/auth.dart';
+import '../widget_helper.dart';
 import 'animated_button.dart';
 import 'animated_text_form_field.dart';
-
-import '../models/login_data.dart';
-import '../providers/auth.dart';
-import '../providers/login_messages.dart';
-import '../widget_helper.dart';
 
 class ConfirmSignupCard extends StatefulWidget {
   ConfirmSignupCard({
@@ -125,7 +123,7 @@ class ConfirmSignupCardState extends State<ConfirmSignupCard>
     return AnimatedTextFormField(
       width: width,
       labelText: messages.confirmationCodeHint,
-      prefixIcon: Icon(FontAwesomeIcons.solidCheckCircle),
+      prefixIcon: Icon(FontAwesomeIcons.solidCircleCheck),
       textInputAction: TextInputAction.done,
       onFieldSubmitted: (value) => _submit(),
       validator: (value) {

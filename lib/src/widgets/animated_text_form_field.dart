@@ -45,6 +45,7 @@ class AnimatedTextFormField extends StatefulWidget {
     this.onSaved,
     this.autocorrect = false,
     this.autofillHints,
+    this.autofocus = false,
   })  : assert((inertiaController == null && inertiaDirection == null) ||
             (inertiaController != null && inertiaDirection != null)),
         super(key: key);
@@ -68,6 +69,7 @@ class AnimatedTextFormField extends StatefulWidget {
   final ValueChanged<String>? onFieldSubmitted;
   final FormFieldSetter<String>? onSaved;
   final TextFieldInertiaDirection? inertiaDirection;
+  final bool autofocus;
 
   @override
   _AnimatedTextFormFieldState createState() => _AnimatedTextFormFieldState();
@@ -208,6 +210,7 @@ class _AnimatedTextFormFieldState extends State<AnimatedTextFormField> {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     Widget textField = TextFormField(
+      autofocus: widget.autofocus,
       cursorColor: theme.primaryColor,
       controller: widget.controller,
       focusNode: widget.focusNode,

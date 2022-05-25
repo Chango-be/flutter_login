@@ -5,27 +5,17 @@ import 'dart:math';
 
 import 'package:another_transformer_page_view/another_transformer_page_view.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_login/flutter_login.dart';
-import 'package:flutter_login/src/constants.dart';
-import 'package:flutter_login/src/dart_helper.dart';
-import 'package:flutter_login/src/matrix.dart';
-import 'package:flutter_login/src/models/login_data.dart';
-import 'package:flutter_login/src/models/login_user_type.dart';
-import 'package:flutter_login/src/models/signup_data.dart';
-import 'package:flutter_login/src/models/user_form_field.dart';
-import 'package:flutter_login/src/paddings.dart';
-import 'package:flutter_login/src/providers/auth.dart';
-import 'package:flutter_login/src/providers/login_messages.dart';
-import 'package:flutter_login/src/providers/login_theme.dart';
-import 'package:flutter_login/src/utils/text_field_utils.dart';
-import 'package:flutter_login/src/widget_helper.dart';
-import 'package:flutter_login/src/widgets/recover_confirm_card.dart';
-import 'package:flutter_login/src/widgets/signup_confirm_card.dart';
-import 'package:flutter_login/src/widgets/term_of_service_checkbox.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 
 import '../../flutter_login.dart';
+import '../constants.dart';
+import '../dart_helper.dart';
+import '../matrix.dart';
+import '../paddings.dart';
+import '../providers/auth.dart';
+import '../utils/text_field_utils.dart';
+import '../widget_helper.dart';
 import 'animated_button.dart';
 import 'animated_icon.dart';
 import 'animated_text.dart';
@@ -33,30 +23,34 @@ import 'animated_text_form_field.dart';
 import 'custom_page_transformer.dart';
 import 'expandable_container.dart';
 import 'fade_in.dart';
+import 'recover_confirm_card.dart';
+import 'signup_confirm_card.dart';
+import 'term_of_service_checkbox.dart';
 
 part 'additional_signup_card.dart';
 part 'login_card.dart';
 part 'recover_card.dart';
 
 class AuthCard extends StatefulWidget {
-  AuthCard(
-      {Key? key,
-      required this.userType,
-      this.padding = const EdgeInsets.all(0),
-      this.loadingController,
-      this.userValidator,
-      this.passwordValidator,
-      this.onSubmit,
-      this.onSubmitCompleted,
-      this.hideForgotPasswordButton = false,
-      this.hideSignUpButton = false,
-      this.loginAfterSignUp = true,
-      this.hideProvidersTitle = false,
-      this.additionalSignUpFields,
-      this.disableCustomPageTransformer = false,
-      this.loginTheme,
-      this.navigateBackAfterRecovery = false})
-      : super(key: key);
+  AuthCard({
+    Key? key,
+    required this.userType,
+    this.padding = const EdgeInsets.all(0),
+    this.loadingController,
+    this.userValidator,
+    this.passwordValidator,
+    this.onSubmit,
+    this.onSubmitCompleted,
+    this.hideForgotPasswordButton = false,
+    this.hideSignUpButton = false,
+    this.loginAfterSignUp = true,
+    this.hideProvidersTitle = false,
+    this.additionalSignUpFields,
+    this.disableCustomPageTransformer = false,
+    this.loginTheme,
+    this.navigateBackAfterRecovery = false,
+    this.autofocus = false,
+  }) : super(key: key);
 
   final EdgeInsets padding;
   final AnimationController? loadingController;
@@ -75,6 +69,7 @@ class AuthCard extends StatefulWidget {
   final bool disableCustomPageTransformer;
   final LoginTheme? loginTheme;
   final bool navigateBackAfterRecovery;
+  final bool autofocus;
 
   @override
   AuthCardState createState() => AuthCardState();
@@ -282,7 +277,7 @@ class AuthCardState extends State<AuthCard> with TickerProviderStateMixin {
           ),
         ),
         child: DecoratedBox(
-          decoration: BoxDecoration(color: theme.accentColor),
+          decoration: BoxDecoration(color: theme.colorScheme.secondary),
         ),
       ),
     );
@@ -331,6 +326,7 @@ class AuthCardState extends State<AuthCard> with TickerProviderStateMixin {
             hideForgotPasswordButton: widget.hideForgotPasswordButton,
             loginAfterSignUp: widget.loginAfterSignUp,
             hideProvidersTitle: widget.hideProvidersTitle,
+            autofocus: widget.autofocus,
           ),
         );
       case _recoveryIndex:

@@ -1,5 +1,6 @@
-import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+
 import 'dashboard_screen.dart';
 import 'login_screen.dart';
 import 'transition_route_observer.dart';
@@ -22,7 +23,6 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         // brightness: Brightness.dark,
         primarySwatch: Colors.deepPurple,
-        accentColor: Colors.orange,
         textSelectionTheme: TextSelectionThemeData(cursorColor: Colors.orange),
         // fontFamily: 'SourceSansPro',
         textTheme: TextTheme(

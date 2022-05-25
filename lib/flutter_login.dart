@@ -29,10 +29,10 @@ import 'theme.dart';
 export 'src/models/login_data.dart';
 export 'src/models/login_user_type.dart';
 export 'src/models/signup_data.dart';
+export 'src/models/term_of_service.dart';
 export 'src/models/user_form_field.dart';
 export 'src/providers/login_messages.dart';
 export 'src/providers/login_theme.dart';
-export 'src/models/term_of_service.dart';
 
 class LoginProvider {
   /// The icon shown on the provider button
@@ -112,7 +112,6 @@ class _Header extends StatefulWidget {
     this.logoController,
     this.titleController,
     required this.loginTheme,
-    this.footer,
   });
 
   final ImageProvider? logo;
@@ -124,7 +123,6 @@ class _Header extends StatefulWidget {
   final LoginTheme loginTheme;
   final AnimationController? logoController;
   final AnimationController? titleController;
-  final String? footer;
 
   @override
   __HeaderState createState() => __HeaderState();
@@ -250,40 +248,41 @@ class __HeaderState extends State<_Header> {
 }
 
 class FlutterLogin extends StatefulWidget {
-  FlutterLogin(
-      {Key? key,
-      required this.onSignup,
-      required this.onLogin,
-      required this.onRecoverPassword,
-      this.title,
+  FlutterLogin({
+    Key? key,
+    required this.onSignup,
+    required this.onLogin,
+    required this.onRecoverPassword,
+    this.title,
 
-      /// The [ImageProvider] or asset path [String] for the logo image to be displayed
-      dynamic logo,
-      this.messages,
-      this.theme,
-      this.userValidator,
-      this.passwordValidator,
-      this.onSubmitAnimationCompleted,
-      this.logoTag,
-      this.userType = LoginUserType.email,
-      this.titleTag,
-      this.showDebugButtons = false,
-      this.loginProviders = const <LoginProvider>[],
-      this.hideForgotPasswordButton = false,
-      this.hideSignUpButton = false,
-      this.loginAfterSignUp = true,
-      this.footer,
-      this.hideProvidersTitle = false,
-      this.additionalSignupFields,
-      this.disableCustomPageTransformer = false,
-      this.navigateBackAfterRecovery = false,
-      this.termsOfService = const <TermOfService>[],
-      this.onConfirmRecover,
-      this.onConfirmSignup,
-      this.onResendCode,
-      this.savedEmail = '',
-      this.savedPassword = ''})
-      : assert((logo is String?) || (logo is ImageProvider?)),
+    /// The [ImageProvider] or asset path [String] for the logo image to be displayed
+    dynamic logo,
+    this.messages,
+    this.theme,
+    this.userValidator,
+    this.passwordValidator,
+    this.onSubmitAnimationCompleted,
+    this.logoTag,
+    this.userType = LoginUserType.email,
+    this.titleTag,
+    this.showDebugButtons = false,
+    this.loginProviders = const <LoginProvider>[],
+    this.hideForgotPasswordButton = false,
+    this.hideSignUpButton = false,
+    this.loginAfterSignUp = true,
+    this.footer,
+    this.hideProvidersTitle = false,
+    this.additionalSignupFields,
+    this.disableCustomPageTransformer = false,
+    this.navigateBackAfterRecovery = false,
+    this.termsOfService = const <TermOfService>[],
+    this.onConfirmRecover,
+    this.onConfirmSignup,
+    this.onResendCode,
+    this.savedEmail = '',
+    this.savedPassword = '',
+    this.autofocus = false,
+  })  : assert((logo is String?) || (logo is ImageProvider?)),
         logo = logo is String ? AssetImage(logo) : logo,
         super(key: key);
 
@@ -360,6 +359,9 @@ class FlutterLogin extends StatefulWidget {
 
   /// Optional footer text for example a copyright notice
   final String? footer;
+
+  /// Set to true to set focus on username field as soon as login form appears. Defaults to false.
+  final bool autofocus;
 
   /// Hide the title above the login providers. If no providers are set this is uneffective
   final bool hideProvidersTitle;
@@ -561,7 +563,6 @@ class _FlutterLoginState extends State<FlutterLogin>
     final primaryColorDark = primaryDarkShades.length >= 3
         ? primaryDarkShades[2]
         : primaryDarkShades.last;
-    final accentColor = loginTheme.accentColor ?? theme.accentColor;
     final errorColor = loginTheme.errorColor ?? theme.errorColor;
     // the background is a dark gradient, force to use white text if detect default black text color
     final isDefaultBlackText = theme.textTheme.headline3!.color ==
@@ -603,7 +604,6 @@ class _FlutterLoginState extends State<FlutterLogin>
     return theme.copyWith(
       primaryColor: primaryColor,
       primaryColorDark: primaryColorDark,
-      accentColor: accentColor,
       errorColor: errorColor,
       cardTheme: theme.cardTheme.copyWith(
         clipBehavior: cardTheme.clipBehavior,
@@ -657,7 +657,7 @@ class _FlutterLoginState extends State<FlutterLogin>
       ),
       floatingActionButtonTheme: theme.floatingActionButtonTheme.copyWith(
         backgroundColor: buttonTheme.backgroundColor ?? primaryColor,
-        splashColor: buttonTheme.splashColor ?? theme.accentColor,
+        splashColor: buttonTheme.splashColor ?? theme.colorScheme.secondary,
         elevation: buttonTheme.elevation ?? 4.0,
         highlightElevation: buttonTheme.highlightElevation ?? 2.0,
         shape: buttonTheme.shape ?? StadiumBorder(),
@@ -743,6 +743,7 @@ class _FlutterLoginState extends State<FlutterLogin>
                     Positioned(
                       child: AuthCard(
                         key: authCardKey,
+                        autofocus: widget.autofocus,
                         userType: widget.userType,
                         padding: EdgeInsets.only(top: cardTopPosition),
                         loadingController: _loadingController,
